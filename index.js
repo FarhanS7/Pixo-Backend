@@ -6,6 +6,7 @@ require("dotenv").config();
 const postRouter = require("./router/post/postRouter");
 //!Connect to DB
 connectDB();
+console.log("Mongo URI:", process.env.MONGO_URL);
 
 //!PORT
 const PORT = process.env.PORT || 5000;
@@ -20,7 +21,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //!ROUTES
-app.use("/api/v1", postRouter);
+app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/users", usersRouter);
 
 //!Not found
 app.use((req, res, next) => {
